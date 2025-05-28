@@ -38,8 +38,8 @@ const MainPage = () => {
         const headers = { Authorization: `Bearer ${token}` };
 
         const [operatorsRes, attendanceRes] = await Promise.all([
-          axios.get(`http://localhost:5000/api/operators/${line}`, { headers }),
-          axios.get(`http://localhost:5000/api/attendance/${line}/${new Date().toISOString().split('T')[0]}`, { headers }),
+          axios.get(`https://op-backend-d1b9.onrender.com/api/operators/${line}`, { headers }),
+          axios.get(`https://op-backend-d1b9.onrender.com/api/attendance/${line}/${new Date().toISOString().split('T')[0]}`, { headers }),
         ]);
 
         setOperators(operatorsRes.data || []);
@@ -76,7 +76,7 @@ const MainPage = () => {
         formDataToSend.append('employeeId', formData.employeeId);
         formDataToSend.append('station', formData.station);
         formDataToSend.append('file', formData.file);
-        const res = await axios.post(`http://localhost:5000/api/operators/${line}`, formDataToSend, {
+        const res = await axios.post(`https://op-backend-d1b9.onrender.com/api/operators/${line}`, formDataToSend, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
             'Content-Type': 'multipart/form-data',
@@ -93,7 +93,7 @@ const MainPage = () => {
 
     const handleDeleteOperator = async (id) => {
       try {
-        await axios.delete(`http://localhost:5000/api/operators/${line}/${id}`, {
+        await axios.delete(`https://op-backend-d1b9.onrender.com/api/operators/${line}/${id}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         setOperators(operators.filter((op) => op._id !== id));
@@ -280,7 +280,7 @@ const MainPage = () => {
             };
             console.log('Sending attendance record:', attendanceRecord);
             try {
-              const response = await axios.post(`http://localhost:5000/api/attendance/${line}`, attendanceRecord, {
+              const response = await axios.post(`https://op-backend-d1b9.onrender.com/api/attendance/${line}`, attendanceRecord, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
               });
               setAttendance([...attendance, response.data]);
@@ -366,7 +366,7 @@ const MainPage = () => {
 
     const handleExport = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/attendance/${line}/${exportDate}`, {
+        const response = await axios.get(`https://op-backend-d1b9.onrender.com/api/attendance/${line}/${exportDate}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
           responseType: 'blob',
         });
