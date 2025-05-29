@@ -328,7 +328,7 @@ const MainPage = () => {
               operatorId: matchedOperator._id,
               date: today,
               timestamp: currentTimestamp,
-            };
+            };ss
             console.log('Sending attendance record:', attendanceRecord);
             try {
               const response = await axios.post(`https://op-backend-d1b9.onrender.com/api/attendance/${line}`, attendanceRecord, {
