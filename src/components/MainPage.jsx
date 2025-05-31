@@ -484,6 +484,15 @@ const MainPage = () => {
     };
   };
 
+  const handleSendAttendance = async () => {
+    try {
+      await axios.post('https://op-backend-d1b9.onrender.com/api/attendance/send-attendance');
+      alert('Attendance email sent!');
+    } catch (err) {
+      alert('Failed to send attendance email');
+    }
+  };
+
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Attendance System - Line {line}</h1>
@@ -497,6 +506,9 @@ const MainPage = () => {
         </button>
         <button onClick={() => setShowExportModal(true)} className="bg-yellow-500 text-white px-4 py-2 rounded">
           Export Attendance
+        </button>
+        <button onClick={handleSendAttendance} className="bg-purple-500 text-white px-4 py-2 rounded">
+          Send Attendance
         </button>
       </div>
       <div>
